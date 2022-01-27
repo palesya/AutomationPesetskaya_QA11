@@ -1,6 +1,4 @@
-package Lecture_5;
-
-import java.util.List;
+package Homework_5;
 
 public class FormData {
     public String rWidth;

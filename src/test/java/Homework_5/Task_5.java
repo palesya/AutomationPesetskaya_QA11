@@ -1,7 +1,7 @@
 package Homework_5;
 
-import Lecture_5.FormData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +26,7 @@ public class Task_5 {
     }
 
     @Test(dataProvider = "data")
-    public void calcLaminate(FormData formData, List<String> expectedData) {
+    public void calcLaminate(FormData formData, List<String> expectedResults) {
         driver.get("https://masterskayapola.ru/kalkulyator/laminata.html");
         //Web elements
         WebElement roomwidth = driver.findElement(By.name("calc_roomwidth"));
@@ -44,30 +44,22 @@ public class Task_5 {
         List<WebElement> results = driver.findElements(By.xpath("//div[@class='col-xs-12 col-sm-12 whiteback']//div[@class='col-xs-12 col-sm-12']"));
 
         //Actions
-        roomwidth.click();
-        roomwidth.sendKeys("\b\b\b\b");
+        clearField(roomwidth);
         roomwidth.sendKeys(formData.rWidth);
-        roomheight.click();
-        roomheight.sendKeys("\b\b\b\b");
+        clearField(roomheight);
         roomheight.sendKeys(formData.rHeight);
-        lamwidth.click();
-        lamwidth.sendKeys("\b\b\b\b");
+        clearField(lamwidth);
         lamwidth.sendKeys(formData.lWidth);
-        lamheight.click();
-        lamheight.sendKeys("\b\b\b\b");
+        clearField(lamheight);
         lamheight.sendKeys(formData.lHeight);
-        inpack.click();
-        inpack.sendKeys("\b\b\b\b");
+        clearField(inpack);
         inpack.sendKeys(formData.pack);
-        price.click();
-        price.sendKeys("\b\b\b\b");
+        clearField(price);
         price.sendKeys(formData.pr);
         selectDirection.selectByValue(formData.direction);
-        bias.click();
-        bias.sendKeys("\b\b\b\b");
+        clearField(bias);
         bias.sendKeys(formData.bi);
-        walldist.click();
-        walldist.sendKeys("\b\b\b\b");
+        clearField(walldist);
         walldist.sendKeys(formData.wDist);
         calcButton.click();
 
@@ -76,10 +68,11 @@ public class Task_5 {
             String data = element.getText();
             System.out.println(data);
         });*/
+
         List<String> actualData = new ArrayList<>() {{
             results.forEach((element) -> add(element.getText()));
         }};
-        Assert.assertEquals(actualData, expectedData);
+        Assert.assertEquals(actualData, expectedResults);
 
     }
 
@@ -88,31 +81,13 @@ public class Task_5 {
         FormData data1 = new FormData("6", "4", "1200", "192", "12", "500", "tow", "300", "10");
         FormData data2 = new FormData("3", "8", "1300", "208", "18", "800", "toh", "200", "12");
         FormData data3 = new FormData("4", "3", "1500", "300", "20", "1000", "toh", "250", "15");
+        CalculatedResults results1 = new CalculatedResults("23.80", "106", "9", "12441", "2", "8");
+        CalculatedResults results2 = new CalculatedResults("23.74", "93", "6", "23362", "15", "3");
+        CalculatedResults results3 = new CalculatedResults("11.79", "30", "2", "18000", "10", "7");
         return new Object[][]{
-                {data1, new ArrayList<String>() {{
-                    add("Площадь укладки: 23.80 м2.");
-                    add("Кол-во панелей: 106 шт.");
-                    add("Кол-во упаковок: 9 шт.");
-                    add("Стоимость: 12441 руб.");
-                    add("Остатки: 2 шт.");
-                    add("Отрезки: 8 шт.");
-                }}},
-                {data2, new ArrayList<String>() {{
-                    add("Площадь укладки: 23.74 м2.");
-                    add("Кол-во панелей: 93 шт.");
-                    add("Кол-во упаковок: 6 шт.");
-                    add("Стоимость: 23362 руб.");
-                    add("Остатки: 15 шт.");
-                    add("Отрезки: 3 шт.");
-                }}},
-                {data3, new ArrayList<String>() {{
-                    add("Площадь укладки: 11.79 м2.");
-                    add("Кол-во панелей: 30 шт.");
-                    add("Кол-во упаковок: 2 шт.");
-                    add("Стоимость: 18000 руб.");
-                    add("Остатки: 10 шт.");
-                    add("Отрезки: 7 шт.");
-                }}},
+                {data1, results1.getResults()},
+                {data2, results2.getResults()},
+                {data3, results3.getResults()},
         };
     }
 
@@ -120,5 +95,13 @@ public class Task_5 {
     public void close() {
         driver.close();
         driver.quit();
+    }
+
+    private void clearField(WebElement element){
+        element.click();
+        do{
+            element.sendKeys(Keys.BACK_SPACE);
+        }
+        while(!element.getAttribute("value").isEmpty());
     }
 }
