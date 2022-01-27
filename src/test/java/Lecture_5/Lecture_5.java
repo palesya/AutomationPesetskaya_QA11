@@ -68,8 +68,8 @@ public class Lecture_5 {
             results.forEach((element) -> add(element.getText()));
         }};
         Assert.assertEquals(actualData, expectedData);
-
     }
+
 
     /**
      * @param data -input String data
