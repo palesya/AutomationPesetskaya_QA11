@@ -40,7 +40,7 @@ public class Task_6 {
         loginButton.click();
     }
 
-    //выбираем товар с ценой меньше 10$ и добавляем его в корзину (чтобы использовать Relative locator toRightOf)
+    //выбираем первый товар с ценой меньше 10$ и добавляем его в корзину (чтобы использовать Relative locator toRightOf)
     @Test(priority = 2)
     public void addToCart() {
         WebElement priceWebElement = findElementWithPrice();
