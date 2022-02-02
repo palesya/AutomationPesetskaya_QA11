@@ -67,6 +67,7 @@ public class Lecture_5 {
         List<String> actualData = new ArrayList<>() {{
             results.forEach((element) -> add(element.getText()));
         }};
+
         Assert.assertEquals(actualData, expectedData);
     }
 

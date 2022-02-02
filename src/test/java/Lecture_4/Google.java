@@ -61,11 +61,11 @@ public class Google {
         driver.findElement(By.tagName("img")).isDisplayed();
     }
 
-    @Test (priority = 4)
+    @Test(priority = 4)
     public void findPizzaOnMap() {
         driver.get("https://www.google.by/");
-        String buttonName=driver.findElement(By.xpath("//div[3]/center/input")).getAttribute("value");
-        if(Objects.equals(buttonName, "Пошук Google")){
+        String buttonName = driver.findElement(By.xpath("//div[3]/center/input")).getAttribute("value");
+        if (Objects.equals(buttonName, "Пошук Google")) {
             driver.findElement(By.xpath("//div[4]/div/div/a")).click();
         }
         driver.findElement(By.name("q")).sendKeys("пицца");
