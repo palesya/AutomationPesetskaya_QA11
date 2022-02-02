@@ -1,27 +1,16 @@
 package Homework_6;
 
+import BaseObjects.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
-public class Task_6 {
-
-    WebDriver driver = null;
-
-    @BeforeTest
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().fullscreen();
-    }
+public class Task_6 extends BaseTest {
 
     @Test(priority = 1)
     public void logIn() {
@@ -76,12 +65,5 @@ public class Task_6 {
         }
         return priceWebElement;
     }
-
-    @AfterTest
-    public void close() {
-        driver.close();
-        driver.quit();
-    }
-
 
 }
