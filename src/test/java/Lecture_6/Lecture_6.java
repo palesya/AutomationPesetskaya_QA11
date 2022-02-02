@@ -15,7 +15,7 @@ public class Lecture_6 {
     WebDriver driver = null;
 
     @BeforeTest
-    public void setUp() {
+    public void setUpNew() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
