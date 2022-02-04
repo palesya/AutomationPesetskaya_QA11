@@ -56,7 +56,7 @@ public class Task_6 extends BaseTest {
     }
 
     //выбираем первый товар с ценой меньше 10$ и добавляем его в корзину (чтобы использовать Relative locator toRightOf)
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void addToCart() {
         WebElement priceWebElement = findElementWithPrice();
         if (priceWebElement != null) {
@@ -70,7 +70,7 @@ public class Task_6 extends BaseTest {
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void checkCart() {
         String productPriceAddedToCart = findElementWithPrice().getText();
         // ancestor
