@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <style>
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+p{
+font-family: Brush Script MT;
+font-size: 20pt;
+color: #2a486e;
+}
+
+.c {
+    border: 2px solid #333;
+    display: inline-block;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #c5d0de;
+    background-color: #5a7494;
+  }
+
+.button{
+background-color: #8cabd1;
+font-size: 12pt;
+}
+
+    </style>
+
+
+</head>
+<body style="background-color:#d7dbe0">
+<h2>Cars</h2>
+
+<table>
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Year</th>
+    </tr>
+    <tr>
+        <td>Renault</td>
+        <td>Koleos</td>
+        <td>2021</td>
+    </tr>
+    <tr>
+        <td>Geely</td>
+        <td>Atlas</td>
+        <td>2020</td>
+    </tr>
+    <tr>
+        <td>Renault</td>
+        <td>Kaptur</td>
+        <td>2020</td>
+    </tr>
+    <tr>
+        <td>Mercedes</td>
+        <td>Concept EQV</td>
+        <td>2019</td>
+    </tr>
+</table>
+<p style="margin-top: 40px; margin-bottom: 3px;"> "All started when I looked around and, not seeing the car of my dreams, decided to
+    design it myself." </p>
+<p style="margin-top: 3px; margin-left: 550px;">- Ferdinand Porsche</p>
+<img src="https://www.domkrat.by/upload/img_catalog/koleos/renault_koleos_1.jpg" alt="Renault Koleos" style="float:right" width="900" height="580">
+<h3 style="margin-top: 40px;" type="question">Please, answer the questions below:</h3>
+<h4 style="margin-top: 10px;" type="question">1. What Car do you prefer?</h4>
+
+<form>
+    <label for="brand">Brand:</label><br>
+    <input type="text" id="brand" name="car_brand"><br>
+    <label for="model">Model:</label><br>
+    <input type="text" id="model" name="car_model"><br><br>
+</form>
+
+
+
+<h4 type="question" style="margin-top: 10px;" >2. Do you have a car?</h4>
+
+<div>
+    <input type="checkbox" id="yes" name="yes_answer">
+    <label for="yes"> Yes, I have a car.</label><br>
+    <input type="checkbox" id="no" name="no_answer">
+    <label for="no"> No, I have no car.</label><br>
+    <input type="checkbox" id="had" name="had_answer">
+    <label for="had"> I had in past.</label><br><br>
+    <button type="button" class="button">Answer</button>
+</div>
+<div id="test_drive">
+<h3 type="question" style="margin-top: 40px;">Are you interested in one of our cars?</h3>
+<form>
+    <label for="cars">Cars:</label>
+    <select name="cars" id="cars">
+        <option value="renaultKoleos">Renault Koleos</option>
+        <option value="geely">Geely Atlas</option>
+        <option value="renaultKaptur">Renault Kaptur</option>
+        <option value="mercedes">Mercedes Concept EQV</option>
+        <option value="no">No,thanks</option>
+    </select>
+    <br><br>
+    <button type="button" class="button">Select for test drive</button>
+</form>
+</div>
+
+<h3 style="margin-bottom: 3px;">Check prices: </h3>
+<a class="c" href="https://www.renault.by/cars/koleos/overview.html" >renault.by</a>
+</body>
+</html>
