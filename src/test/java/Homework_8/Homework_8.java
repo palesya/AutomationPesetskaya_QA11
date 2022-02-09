@@ -16,7 +16,7 @@ public class Homework_8 extends BaseTest {
     public void checkFirstValueInList() {
         driver.get("D:/AutomationPesetskaya_QA11/src/test/java/Homework_8/task_8.html");
         //Создать коллекцию из значений в первой колонке
-        List<WebElement> brandsWebEl = driver.findElements(By.xpath("//tr/td[1]"));
+        List<WebElement> brandsWebEl = driver.findElements(By.cssSelector("td:first-child"));
         List<String> brandsStringList = new ArrayList<>() {{
             brandsWebEl.forEach((element) -> add(element.getText()));
         }};
