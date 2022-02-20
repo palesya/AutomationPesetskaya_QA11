@@ -21,7 +21,7 @@ public class Lecture_9 extends BaseTest {
                 .clickLink("A/B Testing");
 
         get(AbTestPage.class)
-                .checkContainText("Also known");
+                .checkContainText("Also");
     }
 
 }

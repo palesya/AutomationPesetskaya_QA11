@@ -11,4 +11,12 @@ public abstract class BasePage {
         this.driver = driver;
     }
 
+    private void pause(long timeout){
+        try {
+            Thread.sleep(timeout*1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
 }
