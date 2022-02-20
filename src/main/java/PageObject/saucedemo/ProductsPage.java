@@ -6,43 +6,52 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 public class ProductsPage extends BasePageDemo {
 
-    private By addToCartButton = By.cssSelector(".btn.btn_primary.btn_small");
-    private By removeButton = By.cssSelector("[name^=remove]");
+    private By addOrRemoveButton = By.xpath("//div[@id='inventory_container']//button");
     private By price = By.cssSelector("div.inventory_item_price");
     private By filter = By.className("product_sort_container");
     private By productImage = By.className("inventory_item_img");
+    private By productName = By.className("inventory_item_name");
 
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void isOpened() {
+    public ProductsPage isOpened() {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        return this;
     }
 
-    public void addToCartFirstProductWithPriceFromRange(int minPrice, int maxPrice) {
-        WebElement priceWebElement = null;
-        double selectedPrice = 0;
+    public void addToCartProductWithPriceFromRange(int minPrice, int maxPrice) {
         List<WebElement> prices = driver.findElements(price);
+        WebElement priceWebElement;
+        double selectedPrice;
+        String buttonName;
+        int counterOfSuitableProducts = 0;
         for (WebElement price : prices) {
             selectedPrice = Double.parseDouble(price.getText().substring(1));
-            if (selectedPrice <= maxPrice & selectedPrice>=minPrice) {
+            if (selectedPrice <= maxPrice & selectedPrice >= minPrice) {
                 priceWebElement = price;
+                buttonName = driver.findElement(with(addOrRemoveButton).toRightOf(priceWebElement)).getText();
+                if (Objects.equals(buttonName, "ADD TO CART")) {
+                    driver.findElement(with(addOrRemoveButton).toRightOf(priceWebElement)).click();
+                    String nameOfAddedProduct = driver.findElement(with(productName).above(priceWebElement)).getText();
+                    System.out.println(nameOfAddedProduct + " with price " + selectedPrice + "$ was addet to Cart.");
+                    counterOfSuitableProducts++;
+                } else {
+                    continue;
+                }
                 break;
             }
         }
-        if (priceWebElement != null) {
-            driver.findElement(with(addToCartButton).toRightOf(priceWebElement)).click();
-            Assert.assertTrue(driver.findElement(removeButton).isDisplayed());
-            System.out.println("Product with price "+ selectedPrice+"$ was addet to Cart.");
-        } else {
-            System.out.println("No price from the range "+ minPrice+"-"+maxPrice+"$ is found");
+        if(counterOfSuitableProducts==0){
+            System.out.println("No available for adding product with price from the range " + minPrice + "-" + maxPrice + "$ is found");
         }
     }
 }

@@ -26,6 +26,7 @@ public class MainPage extends BasePageDemo {
     }
 
     public void logInWithRandomUser(String name, String pswrd) {
+        System.out.println(driver.findElement(userName).getText());
         driver.findElement(userName).sendKeys(name);
         driver.findElement(password).sendKeys(pswrd);
         driver.findElement(loginButton).click();

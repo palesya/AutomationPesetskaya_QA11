@@ -24,7 +24,7 @@ public class Homework_9 extends BaseTest {
     @Test (priority = 2)
     public void addToCart() {
         get(ProductsPage.class)
-                .addToCartFirstProductWithPriceFromRange(5,10);
+                .addToCartProductWithPriceFromRange(5,10);
         get(BasePageDemo.class)
                 .goToShoppingCartLink();
     }
