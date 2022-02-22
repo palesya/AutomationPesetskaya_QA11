@@ -1,15 +1,20 @@
 package BaseObjects;
 
+import TestNGUtils.ExtentReport;
+import TestNGUtils.Listener;
+import TestNGUtils.Report;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 
 import java.lang.reflect.InvocationTargetException;
 
 import static BaseObjects.DriverCreation.*;
 
+@Listeners({Listener.class, Report.class, ExtentReport.class})
 public abstract class BaseTest {
     protected WebDriver driver;
     protected ITestContext context;
@@ -24,16 +29,15 @@ public abstract class BaseTest {
     }
 
     protected <T> T get(Class<T> page) {
-        return get(page,this.driver);
+        return get(page, this.driver);
     }
 
     //создаётс экземпляр класса
     protected <T> T get(Class<T> page, WebDriver driver) {
-        T instance=null;
+        T instance = null;
         try {
             instance = page.getDeclaredConstructor(WebDriver.class).newInstance(driver);
-        }
-        catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchElementException | NoSuchMethodException e){
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchElementException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return instance;
@@ -45,3 +49,4 @@ public abstract class BaseTest {
     }
 
 }
+

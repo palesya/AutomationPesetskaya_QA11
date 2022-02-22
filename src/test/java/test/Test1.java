@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class Test1 {
 
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod
     public void after1(){
         System.out.println("v");
     }

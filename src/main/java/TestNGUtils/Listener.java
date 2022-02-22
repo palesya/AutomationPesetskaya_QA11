@@ -8,6 +8,6 @@ public class Listener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        System.out.println("Hello,I'm started!!!");
+
     }
 }

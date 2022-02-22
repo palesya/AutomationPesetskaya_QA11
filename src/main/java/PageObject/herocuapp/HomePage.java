@@ -18,18 +18,24 @@ public class HomePage extends BasePage {
         return By.partialLinkText(text);
     }
 
+    public HomePage open(String url) {
+        super.open(url);
+        return this;
+    }
+
     public HomePage verifyTitleText() {
-        Assert.assertEquals(driver.findElement(title).getText(), "Welcome to the-internet");
+        Assert.assertEquals(getText(title), "Welcome to the-internet");
         return this;
     }
 
     public HomePage verifySubTitleText() {
-        Assert.assertEquals(driver.findElement(subTitle).getText(), "Available Examples");
+        Assert.assertEquals(getText(subTitle), "Available Examples");
         return this;
     }
 
-    public void clickLink(String text) {
-        driver.findElement(getLink(text)).click();
+    public HomePage clickLink(HomePageLinksEnum link) {
+        click(getLink(link.getLink()));
+        return this;
     }
 
 }

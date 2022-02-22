@@ -1,27 +1,64 @@
 package Lecture_9;
 
 import BaseObjects.BaseTest;
-import PageObject.herocuapp.AbTestPage;
-import PageObject.herocuapp.HomePage;
-import org.testng.annotations.BeforeTest;
+import PageObject.herocuapp.*;
+import io.qameta.allure.*;
+import jdk.jfr.Description;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static PageObject.herocuapp.Conditions.CONTAINS;
+import static PageObject.herocuapp.HomePageLinksEnum.*;
 
 public class Lecture_9 extends BaseTest {
 
-    @BeforeTest
+    String url;
+
+    @BeforeClass
+    public void getUrl() {
+        url = context.getSuite().getParameter("url");
+    }
+
+    @BeforeMethod
     public void preconditions() {
-        driver.get(context.getSuite().getParameter("url"));
+        get(HomePage.class)
+                .open(url)
+                .verifyTitleText()
+                .verifySubTitleText();
+    }
+
+    @Test(description = "A/B Testing page")
+    @Description("Verify A/B Testing page")
+    @Step("Searching for '{keyword}' in Google")
+    @Link("https://instagram.com/")
+    @Issue("ISS-1")
+    @TmsLink("ISS-1")
+    @Attachment(value = "screenshot", type = "image/png")
+    public void abTesting_Test() {
+        get(HomePage.class).clickLink(AB_TESTING);
+
+        get(AbTestPage.class)
+                .checkTitleText(CONTAINS, "A/B Test")
+                .checkText(CONTAINS, "Also known");
     }
 
     @Test
-    public void test() {
-        get(HomePage.class)
-                .verifyTitleText()
-                .verifySubTitleText()
-                .clickLink("A/B Testing");
+    public void checkboxes_Test() {
+        get(HomePage.class).clickLink(CHECKBOXES);
 
-        get(AbTestPage.class)
-                .checkContainText("Also");
+        get(Checkboxes.class)
+                .verifyCheckboxStatus(1, false)
+                .verifyCheckboxStatus(2, true);
+
+        get(Checkboxes.class)
+                .clickCheckbox(1)
+                .clickCheckbox(2);
+
+        get(Checkboxes.class)
+                .verifyCheckboxStatus(1, true)
+                .verifyCheckboxStatus(2, false);
+
     }
 
 }
