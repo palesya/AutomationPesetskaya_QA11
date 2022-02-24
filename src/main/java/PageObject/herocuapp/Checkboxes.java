@@ -11,10 +11,6 @@ public class Checkboxes extends BasePage {
         return By.xpath("(//*[@id='checkboxes']//input)[" + index + "]");
     }
 
-    public Checkboxes(WebDriver driver) {
-        super(driver);
-    }
-
     public Checkboxes clickCheckbox(Integer index) {
         click(checkboxes(index));
         return this;

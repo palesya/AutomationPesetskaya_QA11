@@ -26,7 +26,7 @@ public class GoogleComPage {
 
     public void goToSignInPage() {
         driver.findElement(signInButton).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("accounts.google.com/signin"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("accounts.google.com/signin1"));
     }
 
 }

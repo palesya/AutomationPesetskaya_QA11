@@ -10,10 +10,6 @@ public class HomePage extends BasePage {
     private By title = By.tagName("h1");
     private By subTitle = By.tagName("h2");
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
-
     private By getLink(String text) {
         return By.partialLinkText(text);
     }
@@ -34,7 +30,8 @@ public class HomePage extends BasePage {
     }
 
     public HomePage clickLink(HomePageLinksEnum link) {
-        click(getLink(link.getLink()));
+        actions.click(driver.findElement(getLink(link.getLink()))).perform();
+        //click(getLink(link.getLink()));
         return this;
     }
 
