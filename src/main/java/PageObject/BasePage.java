@@ -4,6 +4,8 @@ import BaseObjects.DriverCreation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -24,7 +26,7 @@ public abstract class BasePage {
     }
 
     //try/catch лучше здесь использовать, чтобы не такскать мо методам, которые его используют
-    private void pause(long seconds) {
+    protected void pause(long seconds) {
         try {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
@@ -49,6 +51,15 @@ public abstract class BasePage {
         driver.findElement(element).click();
         return this;
     }
+
+    protected BasePage wait(By element) {
+        log("Wait for " + element);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
+        return this;
+    }
+
+
 
     protected Integer findElementsCount(By element) {
         return driver.findElements(element).size();

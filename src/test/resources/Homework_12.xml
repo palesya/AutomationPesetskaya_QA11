@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Homework_12">
+    <parameter name="browser" value="CHROME"/>
+    <parameter name="url" value="http://the-internet.herokuapp.com/"/>
+
+    <test name="ContextMenuTest">
+        <parameter name="linkName" value="CONTEXT_MENU"/>
+        <classes>
+            <class name="Lecture_12.HomePageTest"/>
+            <class name="Homework_12.ContextMenuTest"/>
+        </classes>
+    </test>
+
+    <test name="DynamicControlsTest" >
+        <parameter name="linkName" value="DYNAMIC_CONTROLS"/>
+        <classes>
+            <class name="Lecture_12.HomePageTest"/>
+            <class name="Homework_12.DynamicControlsTest"/>
+        </classes>
+    </test>
+
+    <test name="FileUploadTest">
+        <parameter name="linkName" value="FILE_UPLOAD"/>
+        <parameter name="filepath" value="src/test/Batman.jpg"/>
+        <classes>
+            <class name="Lecture_12.HomePageTest"/>
+            <class name="Homework_12.FileUploadTest"/>
+        </classes>
+    </test>
+
+    <test name="FileDownloadTest">
+        <parameter name="linkName" value="FILE_DOWNLOAD"/>
+        <classes>
+            <class name="Lecture_12.HomePageTest"/>
+            <class name="Homework_12.FileDownloadTest"/>
+        </classes>
+    </test>
+
+</suite>

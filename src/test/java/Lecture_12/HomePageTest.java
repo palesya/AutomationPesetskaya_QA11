@@ -1,13 +1,10 @@
 package Lecture_12;
 
 import BaseObjects.BaseTest;
-import PageObject.herocuapp.Checkboxes;
 import PageObject.herocuapp.HomePage;
 import PageObject.herocuapp.HomePageLinksEnum;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-
-import static PageObject.herocuapp.HomePageLinksEnum.CHECKBOXES;
 
 public class HomePageTest extends BaseTest {
 

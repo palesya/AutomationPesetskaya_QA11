@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static PageObject.herocuapp.Conditions.CONTAINS;
+import static PageObject.herocuapp.ConditionsEnum.CONTAINS;
 import static PageObject.herocuapp.HomePageLinksEnum.*;
 
 public class Lecture_9 extends BaseTest {
@@ -47,15 +47,15 @@ public class Lecture_9 extends BaseTest {
     public void checkboxes_Test() {
         get(HomePage.class).clickLink(CHECKBOXES);
 
-        get(Checkboxes.class)
+        get(CheckboxesPage.class)
                 .verifyCheckboxStatus(1, false)
                 .verifyCheckboxStatus(2, true);
 
-        get(Checkboxes.class)
+        get(CheckboxesPage.class)
                 .clickCheckbox(1)
                 .clickCheckbox(2);
 
-        get(Checkboxes.class)
+        get(CheckboxesPage.class)
                 .verifyCheckboxStatus(1, true)
                 .verifyCheckboxStatus(2, false);
 

@@ -4,7 +4,7 @@ import BaseObjects.BaseTest;
 import PageObject.herocuapp.AbTestPage;
 import org.testng.annotations.*;
 
-import static PageObject.herocuapp.Conditions.CONTAINS;
+import static PageObject.herocuapp.ConditionsEnum.CONTAINS;
 
 public class ABTestingTest extends BaseTest {
 
