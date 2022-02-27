@@ -10,7 +10,6 @@ public class ContextMenuPage extends BasePage {
     private By spot = By.id("hot-spot");
 
     public ContextMenuPage rightClickOnSpot() {
-        Actions actions = new Actions(driver);
         actions.contextClick(driver.findElement(spot)).perform();
         Alert alert=driver.switchTo().alert();
         String alertsText = alert.getText();
