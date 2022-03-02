@@ -3,8 +3,8 @@ package PageObject.herocuapp;
 import PageObject.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
 import static PageObject.herocuapp.ConditionsEnum.CONTAINS;
 import static PageObject.herocuapp.ConditionsEnum.EQUALS;
 

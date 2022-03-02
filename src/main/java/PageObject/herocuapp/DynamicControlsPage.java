@@ -2,7 +2,6 @@ package PageObject.herocuapp;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class DynamicControlsPage extends BasePage {

@@ -24,7 +24,6 @@ public abstract class BaseTest {
         this.driver = getDriver();
     }
 
-    //создаётс экземпляр класса
     protected <T> T get(Class<T> page) {
         T instance = null;
         try {

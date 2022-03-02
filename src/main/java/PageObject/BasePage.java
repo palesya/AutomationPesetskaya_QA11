@@ -1,17 +1,15 @@
 package PageObject;
 
-import BaseObjects.DriverCreation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.testng.Reporter.*;
 import static BaseObjects.DriverCreation.getDriver;
+import static org.testng.Reporter.log;
 
 public abstract class BasePage {
 
@@ -25,7 +23,6 @@ public abstract class BasePage {
         this.actions = new Actions(this.driver);
     }
 
-    //try/catch лучше здесь использовать, чтобы не такскать мо методам, которые его используют
     protected void pause(long seconds) {
         try {
             Thread.sleep(seconds * 1000);

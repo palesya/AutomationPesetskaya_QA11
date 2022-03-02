@@ -3,12 +3,7 @@ package PageObject.herocuapp;
 import PageObject.BasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class ContextMenuPage extends BasePage {
     private By spot = By.id("hot-spot");

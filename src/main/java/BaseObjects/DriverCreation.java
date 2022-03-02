@@ -13,7 +13,6 @@ import static io.github.bonigarcia.wdm.WebDriverManager.getInstance;
 import static io.github.bonigarcia.wdm.config.DriverManagerType.valueOf;
 
 public class DriverCreation {
-    //чтобы все обращались к одному драйверу, а не создавали новые
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static void createDriver(String drivers) {
