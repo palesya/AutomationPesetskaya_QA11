@@ -1,5 +1,5 @@
 package PageObject.herocuapp;
 
-public enum Conditions {
+public enum ConditionsEnum {
     EQUALS, CONTAINS
 }

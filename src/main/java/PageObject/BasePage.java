@@ -2,20 +2,31 @@ package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import static org.testng.Reporter.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static BaseObjects.DriverCreation.getDriver;
+import static org.testng.Reporter.log;
 
 public abstract class BasePage {
 
     public WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    protected BasePage(){
+        this.driver = getDriver();
+        this.wait=new WebDriverWait(this.driver, Duration.ofSeconds(5));
+        this.actions = new Actions(this.driver);
     }
 
-    private void pause(long timeout){
+    protected void pause(long seconds) {
         try {
-            Thread.sleep(timeout*1000);
-        }catch (InterruptedException e){
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -38,6 +49,16 @@ public abstract class BasePage {
         return this;
     }
 
+    protected BasePage wait(By element) {
+        log("Wait for " + element);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        return this;
+    }
+
+
+
     protected Integer findElementsCount(By element) {
         return driver.findElements(element).size();
     }
@@ -47,12 +68,11 @@ public abstract class BasePage {
     }
 
     /**
-     *
-     * @param element - web element
+     * @param element       - web element
      * @param attributeName - attriute name
      * @return - string of attribute name
      */
-    protected String getAttribute (By element, String attributeName){
+    protected String getAttribute(By element, String attributeName) {
         return driver.findElement(element).getAttribute(attributeName);
     }
 
