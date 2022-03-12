@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lecture 13">
+    <parameter name="config" value="herokuapp"/>
+    <test name="Java Script Alerts">
+        <parameter name="linkName" value="JS_ALERT"/>
+        <classes>
+            <class name="Lecture_13.HomePage_Test"/>
+            <class name="Lecture_13.JavaScriptAlerts_Test"/>
+        </classes>
+    </test>
+
+    <test name="Frame">
+        <parameter name="linkName" value="FRAMES"/>
+        <classes>
+            <class name="Lecture_13.HomePage_Test"/>
+            <class name="Lecture_13.Frames_Test"/>
+        </classes>
+    </test>
+</suite>

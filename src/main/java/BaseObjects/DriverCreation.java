@@ -30,7 +30,7 @@ public class DriverCreation {
             }
 
             webDriver.manage().window().maximize();
-            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.set(webDriver);
         }
     }

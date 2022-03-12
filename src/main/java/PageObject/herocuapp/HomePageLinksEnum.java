@@ -7,8 +7,9 @@ public enum HomePageLinksEnum {
     CONTEXT_MENU("Context Menu"),
     DYNAMIC_CONTROLS("Dynamic Controls"),
     FILE_UPLOAD("File Upload"),
-    FILE_DOWNLOAD("File Download");
-
+    FILE_DOWNLOAD("File Download"),
+    FRAMES("Frames"),
+    JS_ALERT("JavaScript Alerts");
 
     String link;
 
