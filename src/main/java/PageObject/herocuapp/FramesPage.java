@@ -2,6 +2,7 @@ package PageObject.herocuapp;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 public class FramesPage extends BasePage {
@@ -11,7 +12,8 @@ public class FramesPage extends BasePage {
     private By textArea = By.id("tinymce");
 
     public FramesPage verifyTitle(String titleText) {
-        Assert.assertEquals(getText(title), titleText);
+        String textInTextArea = ((JavascriptExecutor)driver).executeScript("return arguments[0].innerHTML;",driver.findElement(title)).toString();
+        Assert.assertEquals(textInTextArea, titleText);
         return this;
     }
 
@@ -25,13 +27,20 @@ public class FramesPage extends BasePage {
         return this;
     }
 
+    public FramesPage enterTextArea(String enterText) {
+        enter(textArea, enterText);
+        return this;
+    }
+
     public FramesPage unSwitchFrame() {
         driver.switchTo().defaultContent();
         return this;
     }
 
-    public FramesPage enterTextArea(String enterText) {
-        enter(textArea, enterText);
+    public FramesPage checkTextInTextArea(String expectedText) {
+        String textInTextArea = ((JavascriptExecutor)driver).executeScript("return arguments[0].innerHTML;",driver.findElement(By.tagName("p"))).toString();
+        log.debug("Existing text in text area is: " + textInTextArea);
+        Assert.assertEquals(textInTextArea, expectedText);
         return this;
     }
 

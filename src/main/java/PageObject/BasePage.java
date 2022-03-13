@@ -78,7 +78,7 @@ public abstract class BasePage {
         return this;
     }
 
-    public BasePage scrollTo() {
+    public BasePage scrollDown() {
         log.debug("Scroll Down");
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)", "");
         return this;
