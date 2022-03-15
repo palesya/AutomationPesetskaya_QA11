@@ -15,7 +15,7 @@ public class FileUploadPage extends BasePage {
     public FileUploadPage checkUpload(String filepath){
         File file = new File(filepath);
         driver.findElement(chooseFileButton).sendKeys(file.getAbsolutePath());
-        click(uploadButton);
+        clickButton(uploadButton);
         Assert.assertEquals(getText(nameOfUploadedFile),file.getName());
         return this;
     }

@@ -30,7 +30,6 @@ public class HomePage extends BasePage {
 
     public HomePage clickLink(HomePageLinksEnum link) {
         actions.click(driver.findElement(getLink(link.getLink()))).perform();
-        //click(getLink(link.getLink()));
         return this;
     }
 

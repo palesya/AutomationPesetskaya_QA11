@@ -14,7 +14,7 @@ public class DynamicControlsPage extends BasePage {
 
     public DynamicControlsPage checkDynamicCheckbox() {
         Assert.assertTrue(driver.findElement(checkbox).isDisplayed());
-        click(removeButton);
+        clickButton(removeButton);
         wait(itsGoneMessage);
         Assert.assertEquals(driver.findElement(itsGoneMessage).getText(),"It's gone!");
         int numberOfCheckboxes = driver.findElements(checkbox).size();
@@ -24,7 +24,7 @@ public class DynamicControlsPage extends BasePage {
 
     public DynamicControlsPage checkDynamicInput() {
         Assert.assertFalse(driver.findElement(inputField).isEnabled());
-        click(enableButton);
+        clickButton(enableButton);
         wait(itsEnabledMessage);
         Assert.assertEquals(driver.findElement(itsEnabledMessage).getText(),"It's enabled!");
         Assert.assertTrue(driver.findElement(inputField).isEnabled());

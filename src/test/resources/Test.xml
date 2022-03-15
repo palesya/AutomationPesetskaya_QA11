@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test">
+    <parameter name="config" value="herokuapp"/>
+    <test name="Drag and drop">
+        <parameter name="linkName" value="DRAG_AND_DROP"/>
+        <classes>
+            <class name="test.HomePage_Test"/>
+            <class name="test.DragAndDrop_Test"/>
+        </classes>
+    </test>
+
+</suite>
