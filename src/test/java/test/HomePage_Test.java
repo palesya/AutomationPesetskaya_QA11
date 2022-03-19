@@ -1,10 +1,8 @@
-package Lecture_13;
+package test;
 
 import BaseObjects.BaseTest;
-import PageObject.BasePage;
 import PageObject.herocuapp.HomePage;
 import PageObject.herocuapp.HomePageLinksEnum;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 

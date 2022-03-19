@@ -3,6 +3,7 @@ package PageObject.herocuapp;
 import PageObject.BasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 public class JavaScriptAlertsPage extends BasePage {
@@ -11,9 +12,11 @@ public class JavaScriptAlertsPage extends BasePage {
     private By buttonJSConfirm = By.cssSelector("[onclick*='jsConfirm']");
     private By buttonJSPrompt = By.cssSelector("[onclick='jsPrompt()']");
     private By title = By.tagName("h3");
+    private By result = By.xpath("//p[@id='result']");
 
     public JavaScriptAlertsPage verifyTitle() {
-        Assert.assertEquals(getText(title), "JavaScript Alerts");
+        String textOfTitle = ((JavascriptExecutor)driver).executeScript("return arguments[0].innerHTML;",driver.findElement(title)).toString();
+        Assert.assertEquals(textOfTitle, "JavaScript Alerts");
         return this;
     }
 
@@ -25,14 +28,14 @@ public class JavaScriptAlertsPage extends BasePage {
             case ALERT:
                 jsButton = buttonJSAlert;
                 break;
-            case PROMPT:
+            case CONFIRM:
                 jsButton = buttonJSConfirm;
                 break;
-            case CONFIRM:
+            case PROMPT:
                 jsButton = buttonJSPrompt;
                 break;
         }
-        click(jsButton);
+        clickButton(jsButton);
         return this;
     }
 
@@ -42,9 +45,25 @@ public class JavaScriptAlertsPage extends BasePage {
         return this;
     }
 
+    public JavaScriptAlertsPage enterText(String text) {
+        log.debug("Entered text into alert's text field: " + text);
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys(text);
+        return this;
+    }
+
+    public JavaScriptAlertsPage checkEnteredText(String text){
+        log.debug("Shown text under the alerts' buttons is: " + getText(result));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(result));
+        Assert.assertEquals(getText(result), "You entered: " + text);
+        return this;
+    }
+
     public JavaScriptAlertsPage closeAlert() {
+        log.debug("Alert accepted");
         Alert alert = driver.switchTo().alert();
         alert.accept();
         return this;
     }
+
 }
