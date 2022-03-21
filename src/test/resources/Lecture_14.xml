@@ -4,7 +4,7 @@
     <parameter name="config" value="onliner"/>
     <test name="Onliner User">
         <classes>
-            <class name="Lecture_14.Lecture_14"/>
+            <class name="Lecture_14_15.Lecture_14"/>
         </classes>
     </test>
 </suite>

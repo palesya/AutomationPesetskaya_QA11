@@ -50,6 +50,13 @@ public abstract class BasePage {
         return this;
     }
 
+    public BasePage enterPropertyValueIntoField(By field, String property) {
+        String propertyValue = properties.getProperty(property);
+        getWebElement(field).clear();
+        getWebElement(field).sendKeys(propertyValue);
+        return this;
+    }
+
     public BasePage open(String url) {
         log.debug("Open page " + url);
         driver.get(url);
@@ -127,6 +134,12 @@ public abstract class BasePage {
     protected BasePage clickButton(By element) {
         log.debug("Click on button " + element);
         click(element);
+        return this;
+    }
+
+    protected BasePage clickButton(WebElement element) {
+        log.debug("Click on button " + element);
+        element.click();
         return this;
     }
 
@@ -210,6 +223,16 @@ public abstract class BasePage {
        log.debug("Is element exist: "+element);
         List<WebElement> elementList = driver.findElements(element);
         return elementList.size()>0;
+    }
+
+    public Boolean isElementExists(WebElement element) {
+        log.debug("Is element exist: "+element);
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
     }
 
     public Boolean isElementDisplayed(By element) {
