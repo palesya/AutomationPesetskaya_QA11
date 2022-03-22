@@ -2,11 +2,13 @@ package PageFactory;
 
 import Entity.User;
 import PageObject.BasePage;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+@Log4j
 public class LoginPage extends BasePage {
 
     @FindBy(how = How.ID, using = "user-name")

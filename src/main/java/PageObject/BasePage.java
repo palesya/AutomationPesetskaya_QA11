@@ -1,6 +1,7 @@
 package PageObject;
 
 import Configuration.PropertyReader;
+import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,13 +21,13 @@ import java.util.Properties;
 
 import static BaseObjects.DriverCreation.getDriver;
 
+@Log4j
 public abstract class BasePage {
 
     public WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
     protected Properties properties;
-    protected Logger log = Logger.getLogger(BasePage.class);
 
     protected BasePage() {
         this.driver = getDriver();
@@ -50,6 +52,12 @@ public abstract class BasePage {
         return this;
     }
 
+    public BasePage compareCurrentUrlWithExpected(String expectedUrl) {
+        log.debug("Compare current url " + driver.getCurrentUrl());
+        Assert.assertEquals(driver.getCurrentUrl(),expectedUrl);
+        return this;
+    }
+
     public BasePage enterPropertyValueIntoField(By field, String property) {
         String propertyValue = properties.getProperty(property);
         getWebElement(field).clear();
@@ -63,9 +71,18 @@ public abstract class BasePage {
         return this;
     }
 
+    protected BasePage enter(By element, Boolean autoClean, CharSequence... data) {
+        log.debug("Enter " + Arrays.toString(data));
+        if (autoClean) {
+            enter(element, data);
+        } else {
+            getWebElement(element).sendKeys(data);
+        }
+        return this;
+    }
+
     protected BasePage enter(By element, CharSequence... data) {
         log.debug("Enter " + Arrays.toString(data));
-        getWebElement(element).clear();
         getWebElement(element).sendKeys(data);
         return this;
     }

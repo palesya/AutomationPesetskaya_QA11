@@ -26,7 +26,7 @@ public class SaucedemoLogin_Test extends BaseTest {
     @DataProvider(name = "user")
     public Object[][] data() {
         return new Object[][]{
-                {new User.userBuilder().withUsername("standard_user").withPassword("secret_sauce").build()}
+                {new User.UserBuilder().withUserName("standard_user").withPassword("secret_sauce").build()}
         };
     }
 

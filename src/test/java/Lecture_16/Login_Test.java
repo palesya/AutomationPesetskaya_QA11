@@ -1,13 +1,14 @@
-package Lecture_14_15;
+package Lecture_16;
 
 import BaseObjects.BaseTest;
 import Entity.User;
 import PageFactory.LoginPage;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static Entity.User.*;
 
 public class Login_Test extends BaseTest {
 
@@ -38,7 +39,7 @@ public class Login_Test extends BaseTest {
     public Object[][] data() {
         return new Object[][]{
                 {new User("bla", "bla")},
-                {new User.UserBuilder().withUserName("bla").withPassword("bla").build()}
+                {new UserBuilder().withUserName("bla").withPassword("bla").build()}
         };
     }
 }

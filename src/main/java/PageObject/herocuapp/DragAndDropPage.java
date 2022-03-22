@@ -1,10 +1,12 @@
 package PageObject.herocuapp;
 
 import PageObject.BasePage;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
+@Log4j
 public class DragAndDropPage extends BasePage {
 
     private By title = By.tagName("h3");

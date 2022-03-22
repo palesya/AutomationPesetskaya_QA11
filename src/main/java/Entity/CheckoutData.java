@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    private String userName;
-    private String password;
+public class CheckoutData {
+    private String firstName;
+    private String lastName;
+    private String zipPostalCode;
 
-    public static class UserBuilder
+    public static class CheckoutDataBuilder
     {
-        public UserBuilder() { }
+        public CheckoutDataBuilder() { }
     }
 }

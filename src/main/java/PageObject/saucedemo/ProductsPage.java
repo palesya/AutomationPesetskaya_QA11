@@ -1,7 +1,7 @@
 package PageObject.saucedemo;
 
+import PageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -10,18 +10,11 @@ import java.util.Objects;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
-public class ProductsPage extends BasePageDemo {
+public class ProductsPage extends BasePage {
 
     private By addOrRemoveButton = By.xpath("//div[@id='inventory_container']//button");
     private By price = By.cssSelector("div.inventory_item_price");
-    private By filter = By.className("product_sort_container");
-    private By productImage = By.className("inventory_item_img");
     private By productName = By.className("inventory_item_name");
-
-
-    public ProductsPage(WebDriver driver) {
-        super(driver);
-    }
 
     public ProductsPage isOpened() {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
