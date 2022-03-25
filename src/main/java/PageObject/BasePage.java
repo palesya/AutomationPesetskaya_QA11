@@ -3,7 +3,6 @@ package PageObject;
 import Configuration.PropertyReader;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -277,7 +276,7 @@ public abstract class BasePage {
 
     /**
      * @param element       - web element
-     * @param attributeName - attriute name
+     * @param attributeName - attribute name
      * @return - string of attribute name
      */
     protected String getAttribute(By element, String attributeName) {
