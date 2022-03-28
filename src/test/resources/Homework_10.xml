@@ -2,8 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Homework_10">
 
-    <parameter name="browser" value="CHROME"/>
-    <parameter name="url" value="https://www.saucedemo.com/"/>
+    <parameter name="config" value="saucedemo"/>
 
     <test name="Homework_10">
         <classes>

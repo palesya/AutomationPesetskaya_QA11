@@ -1,6 +1,7 @@
 package Homework_10;
 
 import BaseObjects.BaseTest;
+import Entity.User;
 import PageObject.saucedemo.MainPage;
 import PageObject.saucedemo.ProductsPage;
 import PageObject.saucedemo.ShoppingCartPage;
@@ -9,20 +10,20 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import static PageObject.saucedemo.MainPage.TypeOfUser.STANDARD;
+
 public class Homework_10 extends BaseTest {
 
     @BeforeTest
     public void preconditions() {
-        driver.get(context.getSuite().getParameter("url"));
-        driver.manage().window().maximize();
+        get(MainPage.class).open();
     }
 
-    @Test(priority = 1,timeOut = 1000,groups = "login", description = "Log in page")
+    @Test(priority = 1)
     @Step("Log in as standard User")
-    @Attachment(value = "screenshot", type = "png")
     public void logInAsStandardUser() {
         get(MainPage.class)
-                .logInWithCreatedUser(1);
+                .logInWithCreatedUser(STANDARD);
         get(ProductsPage.class)
                 .isOpened();
     }
@@ -32,9 +33,9 @@ public class Homework_10 extends BaseTest {
     @Attachment(value = "screenshot", type = "image/png")
     public void logInWithEmptyUsername() {
         get(MainPage.class)
-                .openEmptyMainPage()
-                .logInWithRandomUser("", "1234");
-        Assert.assertEquals(get(MainPage.class).getErrorText(), "Epic sadface: Username is required");
+                .open()
+                .logInWithRandomUser(new User("", "1234"));
+        get(MainPage.class).compareErrorTextWithExpected("errorForEmptyUsername");
     }
 
     @Test(priority = 7,groups = "login", description = "Log in page")
@@ -42,9 +43,9 @@ public class Homework_10 extends BaseTest {
     @Attachment(value = "screenshot", type = "image/png")
     public void logInWithEmptyPassword() {
         get(MainPage.class)
-                .openEmptyMainPage()
-                .logInWithRandomUser("Alesya", "");
-        Assert.assertEquals(get(MainPage.class).getErrorText(), "Epic sadface: Password is required");
+                .open()
+                .logInWithRandomUser(new User("Alesya",""));
+        get(MainPage.class).compareErrorTextWithExpected("errorForEmptyPassword");
     }
 
     @Test(priority = 8,groups = "login", description = "Log in page")
@@ -52,9 +53,9 @@ public class Homework_10 extends BaseTest {
     @Attachment(value = "screenshot", type = "image/png")
     public void logInAsNotRegisteredUser() {
         get(MainPage.class)
-                .openEmptyMainPage()
-                .logInWithRandomUser("Alesya", "1234");
-        Assert.assertEquals(get(MainPage.class).getErrorText(), "Epic sadface: Username and password do not match any user in this service");
+                .open()
+                .logInWithRandomUser(new User("Alesya", "1234"));
+        get(MainPage.class).compareErrorTextWithExpected("errorForNotRegisteredUser");
     }
 
     @Test(priority = 4, dependsOnMethods = "logInAsStandardUser", invocationCount = 3, invocationTimeOut = 2000, description = "Add to cart")

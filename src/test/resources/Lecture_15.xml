@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lecture 15">
+    <parameter name="config" value="saucedemo"/>
+
+    <test name="Login Page">
+        <classes>
+            <class name="Lecture_14_15.Login_Test"/>
+        </classes>
+    </test>
+</suite>

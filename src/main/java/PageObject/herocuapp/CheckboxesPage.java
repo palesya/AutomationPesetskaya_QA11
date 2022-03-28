@@ -11,7 +11,7 @@ public class CheckboxesPage extends BasePage {
     }
 
     public CheckboxesPage clickCheckbox(Integer index) {
-        click(checkboxes(index));
+        clickButton(checkboxes(index));
         return this;
     }
 

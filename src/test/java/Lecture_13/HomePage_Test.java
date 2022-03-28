@@ -16,8 +16,7 @@ public class HomePage_Test extends BaseTest {
         get(HomePage.class).open();
         get(HomePage.class).verifyTitleText()
                 .verifySubTitleText();
-
-        get(HomePage.class).scrollTo();
+        get(HomePage.class).scrollDown();
         get(HomePage.class).clickLink(HomePageLinksEnum.valueOf(linkName));
     }
 }

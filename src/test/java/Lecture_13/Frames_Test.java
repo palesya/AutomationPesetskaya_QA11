@@ -13,7 +13,7 @@ public class Frames_Test extends BaseTest {
                 .clickOnFrameLink("iFrame")
                 .verifyTitle("An iFrame containing the TinyMCE WYSIWYG Editor")
                 .switchToFrame()
-                .enterTextArea("Hello")
+                .enterTextArea("Hello!")
                 .unSwitchFrame();
     }
 

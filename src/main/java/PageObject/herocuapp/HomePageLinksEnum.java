@@ -9,7 +9,8 @@ public enum HomePageLinksEnum {
     FILE_UPLOAD("File Upload"),
     FILE_DOWNLOAD("File Download"),
     FRAMES("Frames"),
-    JS_ALERT("JavaScript Alerts");
+    JS_ALERT("JavaScript Alerts"),
+    DRAG_AND_DROP("Drag and Drop");
 
     String link;
 
