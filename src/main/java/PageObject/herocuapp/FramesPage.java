@@ -1,10 +1,12 @@
 package PageObject.herocuapp;
 
 import PageObject.BasePage;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
+@Log4j
 public class FramesPage extends BasePage {
 
     private By title = By.tagName("h3");
@@ -28,7 +30,7 @@ public class FramesPage extends BasePage {
     }
 
     public FramesPage enterTextArea(String enterText) {
-        enter(textArea, enterText);
+        enter(textArea,true,enterText);
         return this;
     }
 

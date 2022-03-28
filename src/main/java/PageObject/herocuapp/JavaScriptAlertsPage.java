@@ -1,11 +1,13 @@
 package PageObject.herocuapp;
 
 import PageObject.BasePage;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
+@Log4j
 public class JavaScriptAlertsPage extends BasePage {
 
     private By buttonJSAlert = By.cssSelector("[onclick*='jsAlert']");

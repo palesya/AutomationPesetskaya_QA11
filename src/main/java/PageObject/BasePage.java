@@ -1,14 +1,15 @@
 package PageObject;
 
 import Configuration.PropertyReader;
+import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,13 +20,13 @@ import java.util.Properties;
 
 import static BaseObjects.DriverCreation.getDriver;
 
+@Log4j
 public abstract class BasePage {
 
     public WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
     protected Properties properties;
-    protected Logger log = Logger.getLogger(BasePage.class);
 
     protected BasePage() {
         this.driver = getDriver();
@@ -50,15 +51,37 @@ public abstract class BasePage {
         return this;
     }
 
+    public BasePage compareCurrentUrlWithExpected(String expectedUrl) {
+        log.debug("Compare current url " + driver.getCurrentUrl());
+        Assert.assertEquals(driver.getCurrentUrl(),expectedUrl);
+        return this;
+    }
+
+    public BasePage enterPropertyValueIntoField(By field, String property) {
+        String propertyValue = properties.getProperty(property);
+        getWebElement(field).clear();
+        getWebElement(field).sendKeys(propertyValue);
+        return this;
+    }
+
     public BasePage open(String url) {
         log.debug("Open page " + url);
         driver.get(url);
         return this;
     }
 
+    protected BasePage enter(By element, Boolean autoClean, CharSequence... data) {
+        log.debug("Enter " + Arrays.toString(data));
+        if (autoClean) {
+            enter(element, data);
+        } else {
+            getWebElement(element).sendKeys(data);
+        }
+        return this;
+    }
+
     protected BasePage enter(By element, CharSequence... data) {
         log.debug("Enter " + Arrays.toString(data));
-        getWebElement(element).clear();
         getWebElement(element).sendKeys(data);
         return this;
     }
@@ -127,6 +150,12 @@ public abstract class BasePage {
     protected BasePage clickButton(By element) {
         log.debug("Click on button " + element);
         click(element);
+        return this;
+    }
+
+    protected BasePage clickButton(WebElement element) {
+        log.debug("Click on button " + element);
+        element.click();
         return this;
     }
 
@@ -212,6 +241,16 @@ public abstract class BasePage {
         return elementList.size()>0;
     }
 
+    public Boolean isElementExists(WebElement element) {
+        log.debug("Is element exist: "+element);
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public Boolean isElementDisplayed(By element) {
         log.debug("Is element displayed: "+element);
         return getWebElement(element).isDisplayed();
@@ -237,7 +276,7 @@ public abstract class BasePage {
 
     /**
      * @param element       - web element
-     * @param attributeName - attriute name
+     * @param attributeName - attribute name
      * @return - string of attribute name
      */
     protected String getAttribute(By element, String attributeName) {

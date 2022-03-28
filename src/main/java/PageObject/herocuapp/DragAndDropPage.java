@@ -1,15 +1,12 @@
 package PageObject.herocuapp;
 
 import PageObject.BasePage;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
-
+@Log4j
 public class DragAndDropPage extends BasePage {
 
     private By title = By.tagName("h3");
@@ -26,23 +23,22 @@ public class DragAndDropPage extends BasePage {
     public DragAndDropPage dragAndDropAction() throws InterruptedException {
         log.debug("Drag and drop action performed");
         Actions builder = new Actions(driver);
-        builder.dragAndDropBy(getWebElement(firstSquare),0,500)
+        builder.dragAndDropBy(getWebElement(firstSquare), 0, 500)
                 .release(getWebElement(secondSquare)).perform();
-        //builder.dragAndDrop(getWebElement(firstSquare), getWebElement(secondSquare)).build().perform();
         return this;
     }
 
     public DragAndDropPage checkA_BLocation() {
         log.debug("Check A is located at the left");
-        Assert.assertEquals(getText(firstSquare),"A");
-        Assert.assertEquals(getText(secondSquare),"B");
+        Assert.assertEquals(getText(firstSquare), "A");
+        Assert.assertEquals(getText(secondSquare), "B");
         return this;
     }
 
-    public DragAndDropPage checkB_ALocation() throws InterruptedException {
+    public DragAndDropPage checkB_ALocation() {
         log.debug("Check A is located at the right");
-        Assert.assertEquals(getText(firstSquare),"B");
-        Assert.assertEquals(getText(secondSquare),"A");
+        Assert.assertEquals(getText(firstSquare), "B");
+        Assert.assertEquals(getText(secondSquare), "A");
         return this;
     }
 
