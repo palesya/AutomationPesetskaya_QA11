@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 
 public class Lecture_17 {
 @BeforeTest
@@ -33,15 +36,37 @@ public void precondition(){
 
     @Test(priority = 2)
     public void post_test(){
-        Response response=given().when().header("Content-Type","application/json").and().body(getRequest()).post("/api/users/2");
+        Response response=given().when().header("Content-Type","application/json").and().body(getJsonData("create")).post("/api/users/2");
         response.then().assertThat().statusCode(201);
         Assert.assertEquals(response.then().extract().jsonPath().get("name"),"morpheus");
         Assert.assertEquals(response.then().extract().jsonPath().get("job"),"leader");
     }
 
-    private String getRequest(){
+    @Test(priority = 2)
+    public void user_test(){
+        Response response=given().when().get("/api/users/3");
+        response.then().assertThat().statusCode(200);
+        response.then().assertThat().body("data.id",equalTo(3))
+                        .assertThat().body("support.text",containsString("ReqRes"));
+    }
+
+    @Test(priority = 2)
+    public void jsonSchemaTest_test(){
+        Response response=given().when().get("/api/users/3");
+        response.then().assertThat().statusCode(200);
+        response.then().assertThat().body(matchesJsonSchema(getJsonData("jsonSchemaUser")));
+    }
+
+    @Test(priority = 2)
+    public void jsonSchemaTestUsers_test(){
+        Response response=given().when().get("/api/users?page=2");
+        response.then().assertThat().statusCode(200);
+        response.then().assertThat().body(matchesJsonSchema(getJsonData("jsonSchemaUserArray")));
+    }
+
+    private String getJsonData(String name){
         try {
-            return new String(Files.readAllBytes(Paths.get("src/test/java/Lecture_17/Request/create.json")));
+            return new String(Files.readAllBytes(Paths.get("src/test/java/Lecture_17/Request/"+name+".json")));
         } catch (IOException e) {
             e.printStackTrace();
         }
