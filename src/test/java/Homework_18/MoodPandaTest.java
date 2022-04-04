@@ -3,35 +3,35 @@ package Homework_18;
 import BaseObjects.SelenideBaseTest;
 import PageObject.moodpanda.HomePage;
 import PageObject.moodpanda.SignUpPage;
-import Properties.PropertyReader;
+import com.codeborne.selenide.Configuration;
+import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 import static com.codeborne.selenide.WebDriverRunner.url;
 
+@Log4j
 public class MoodPandaTest extends SelenideBaseTest {
 
     @Test(description = "Check if Homepage is opened", priority = 1)
     public void checkHomepageIsAvailable() {
         get(HomePage.class);
-        Assert.assertTrue(url().matches(getProperty("url")));
+        log.debug("Homepage is opened with current url:"+url());
+        Assert.assertTrue(url().matches(Configuration.baseUrl));
     }
 
     @Test(description = "Check Get started redirection", priority = 2, dependsOnMethods = "checkHomepageIsAvailable")
     public void checkGetStartedRedirection() {
         get(HomePage.class)
                 .clickGetStarted();
-        System.out.println(url());
-        Assert.assertTrue(url().matches(getProperty("url") + "login"));
+        Assert.assertTrue(url().matches(Configuration.baseUrl + "login"));
     }
 
     @Test(description = "Check Sign up redirection from HomePage", priority = 3, dependsOnMethods = "checkHomepageIsAvailable")
     public void checkSignUpRedirection() {
         get(HomePage.class)
                 .clickSignUp();
-        System.out.println(url());
-        Assert.assertTrue(url().matches(getProperty("url") + "signup"));
+        Assert.assertTrue(url().matches(Configuration.baseUrl + "signup"));
     }
 
     @Test(description = "Check informing text on SignUp page", priority = 4, dependsOnMethods = "checkSignUpRedirection")
