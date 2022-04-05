@@ -1,1 +1,0 @@
-# AutomationPesetskaya_QA11
