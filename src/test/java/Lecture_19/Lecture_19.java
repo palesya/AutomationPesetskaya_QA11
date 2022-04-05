@@ -1,30 +1,30 @@
 package Lecture_19;
 
+import MySql.DBConnector;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static MySql.SelectHelper.getSelect;
 
 public class Lecture_19 {
-    Connection connect;
-    Statement statement;
+    DBConnector dbConnector;
 
-    @BeforeTest
+   /* @BeforeTest
     public void preconditions() {
-        try {
-            connect = DriverManager.getConnection("jdbc:mysql://db4free.net/testqa11?user=testqa11&password=testqa11");
-            statement = connect.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+       dbConnector.
+
+    }*
 
     @Test(priority = 1)
-    public void select_test() throws Exception {
-        System.out.println(select("select * from user where id = 1"));
+    public void select_test() {
+
+
     }
 
     @Test(priority = 2)
@@ -47,12 +47,8 @@ public class Lecture_19 {
     }
 
     @AfterTest(alwaysRun = true)
-    public void postconditions() {
-        try {
-            connect.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void closeConnect() {
+        dbConnector.closeConnect();
     }
 
     public int update(String query) {
@@ -73,25 +69,9 @@ public class Lecture_19 {
         return 0;
     }
 
-    public int delete(String query) {
-        try {
-            return statement.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public ResultSet delete(String query) {
+        return dbConnector.executeQuery(query);
     }
+*/
 
-    public List<List<String>> select(String query) throws Exception {
-        ResultSet resultSet = statement.executeQuery(query);
-        List<List<String>> data = new ArrayList<>();
-        while (resultSet.next()) {
-            List<String> row = new ArrayList<>();
-            for (int index = 1; index <= resultSet.getMetaData().getColumnCount(); index++) {
-                row.add(resultSet.getString(index));
-            }
-            data.add(row);
-        }
-        return data;
-    }
 }

@@ -1,6 +1,7 @@
 package PageObject;
 
 import Properties.PropertyReader;
+import com.codeborne.selenide.ex.ElementIsNotClickableException;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -36,7 +37,7 @@ public abstract class BasePage {
     }
 
     protected void pause(long seconds) {
-        log.debug("Pause for seconds: "+seconds);
+        log.debug("Pause for seconds: " + seconds);
         try {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
@@ -53,7 +54,7 @@ public abstract class BasePage {
 
     public BasePage compareCurrentUrlWithExpected(String expectedUrl) {
         log.debug("Compare current url " + driver.getCurrentUrl());
-        Assert.assertEquals(driver.getCurrentUrl(),expectedUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
         return this;
     }
 
@@ -101,8 +102,7 @@ public abstract class BasePage {
     protected BasePage zoomIn(Integer value) {
         log.debug("Zoom in");
         WebElement webElement = getWebElement(By.tagName("html"));
-        for (int i = 0; i<value; i++)
-        {
+        for (int i = 0; i < value; i++) {
             webElement.sendKeys(Keys.chord(new CharSequence[]{Keys.COMMAND, Keys.ADD}));
         }
         return this;
@@ -111,7 +111,7 @@ public abstract class BasePage {
     protected BasePage zoomOut(Integer value) {
         log.debug("Zoom out");
         WebElement webElement = getWebElement(By.tagName("html"));
-        for (int i = 0; i<value; i++){
+        for (int i = 0; i < value; i++) {
             webElement.sendKeys(Keys.chord(new CharSequence[]{Keys.COMMAND, Keys.SUBTRACT}));
         }
         return this;
@@ -119,7 +119,7 @@ public abstract class BasePage {
 
     protected BasePage alertAccept() {
         log.debug("Accept alert");
-       driver.switchTo().alert().accept();
+        driver.switchTo().alert().accept();
         return this;
     }
 
@@ -130,18 +130,18 @@ public abstract class BasePage {
     }
 
     protected BasePage alertSendKeys(String sendText) {
-        log.debug("Send keys to alert: "+sendText);
+        log.debug("Send keys to alert: " + sendText);
         driver.switchTo().alert().sendKeys(sendText);
         return this;
     }
 
-    protected BasePage screenshot(String path){
-        log.debug("Take screenshot to directory: "+path);
-        TakesScreenshot takesScreenshot=((TakesScreenshot) driver);
+    protected BasePage screenshot(String path) {
+        log.debug("Take screenshot to directory: " + path);
+        TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
         File file = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        try{
-            FileUtils.copyFile(file,new File(path));
-        } catch(IOException e){
+        try {
+            FileUtils.copyFile(file, new File(path));
+        } catch (IOException e) {
             log.error(e.getMessage());
         }
         return this;
@@ -159,11 +159,11 @@ public abstract class BasePage {
         return this;
     }
 
+
     protected BasePage clickButtonAndRepeat(By element) {
         try {
             clickButton(element);
-        } catch (
-                ElementNotVisibleException e) {
+        } catch (ElementIsNotClickableException e) {
             clickButton(element);
         }
         return this;
@@ -226,43 +226,43 @@ public abstract class BasePage {
     }
 
     protected Integer findElementsCount(By element) {
-        log.debug("Count elements: "+element);
+        log.debug("Count elements: " + element);
         return driver.findElements(element).size();
     }
 
     protected String getText(By element) {
-        log.debug("Get text of element: "+element);
+        log.debug("Get text of element: " + element);
         return getWebElement(element).getText();
     }
 
-   public Boolean isElementExists(By element) {
-       log.debug("Is element exist: "+element);
+    public Boolean isElementExists(By element) {
+        log.debug("Is element exist: " + element);
         List<WebElement> elementList = driver.findElements(element);
-        return elementList.size()>0;
+        return elementList.size() > 0;
     }
 
     public Boolean isElementExists(WebElement element) {
-        log.debug("Is element exist: "+element);
+        log.debug("Is element exist: " + element);
         try {
             element.isDisplayed();
             return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
 
     public Boolean isElementDisplayed(By element) {
-        log.debug("Is element displayed: "+element);
+        log.debug("Is element displayed: " + element);
         return getWebElement(element).isDisplayed();
     }
 
     public Boolean isElementEnabled(By element) {
-        log.debug("Is element enabled: "+element);
+        log.debug("Is element enabled: " + element);
         return getWebElement(element).isEnabled();
     }
 
-    protected BasePage verify(ExpectedCondition<BasePage> condition){
-        wait.ignoring(ElementNotVisibleException.class).until(condition);
+    protected BasePage verify(ExpectedCondition<Boolean> condition) {
+        wait.ignoring(NoSuchElementException.class).until(condition);
         return this;
     }
 
