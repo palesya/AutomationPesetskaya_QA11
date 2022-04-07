@@ -6,11 +6,9 @@ import lombok.extern.log4j.Log4j;
 import java.sql.*;
 
 @Log4j
-public abstract class DBConnector <T>{
+public class DBConnector <T>{
 
     private static ThreadLocal <Connection> connection=new ThreadLocal<>();
-
-    public abstract T execute();
 
     Connection connect;
 
@@ -37,7 +35,7 @@ public abstract class DBConnector <T>{
         return statement;
     }
 
-    public ResultSet executeQuery(String query){
+    protected ResultSet executeQuery(String query){
         ResultSet resultSet = null;
         try {
             resultSet = getStatement().executeQuery(query);
@@ -48,12 +46,13 @@ public abstract class DBConnector <T>{
     }
 
     public int executeUpdate(String query){
+        int count=0;
         try {
-            getStatement().executeUpdate(query);
+            count=getStatement().executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return count;
     }
 
     public void closeConnect() {

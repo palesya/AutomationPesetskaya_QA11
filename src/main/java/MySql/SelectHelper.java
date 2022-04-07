@@ -1,9 +1,11 @@
 package MySql;
 
+import lombok.extern.log4j.Log4j;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
+@Log4j
 public class SelectHelper extends DBConnector {
 
     private String select;
@@ -32,11 +34,17 @@ public class SelectHelper extends DBConnector {
 
     public SelectHelper execute() {
         String setWhere = this.where == null ? "" : " where " + this.where;
-        resultSet = executeQuery("select" + this.select + " from " + this.from + setWhere);
-        return this;
+        resultSet = executeQuery("select " + this.select + " from " + this.from + setWhere);
+        if (resultSet!=null){
+            log.debug("Data was selected.");
+        }
+        else {
+            log.error("Data wasn't selected.");
+        }
+    return this;
     }
 
-    public List<List<String>> getTableData(String query) throws Exception {
+    public List<List<String>> getListData() throws Exception {
         ResultSet resultSet = this.resultSet;
         List<List<String>> data = new ArrayList<>();
         while (resultSet.next()) {

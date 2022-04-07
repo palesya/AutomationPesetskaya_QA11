@@ -3,12 +3,12 @@ package MySql;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class DeleteHelper extends DBConnector{
+public class DeleteHelper extends DBConnector {
 
     private String from;
     private String where;
 
-    public static DeleteHelper getUpdate() {
+    public static DeleteHelper getDelete() {
         return new DeleteHelper();
     }
 
@@ -23,8 +23,12 @@ public class DeleteHelper extends DBConnector{
     }
 
     public DeleteHelper execute() {
-        executeQuery("delete from" + this.from + " where " + this.where);
-        log.debug("Data was deleted");
+        int count = executeUpdate("delete from " + this.from + " where " + this.where);
+        if (count > 0) {
+            log.debug("Data was deleted");
+        } else {
+            log.error("Data wasn't removed. Something went wrong");
+        }
         return this;
     }
 }

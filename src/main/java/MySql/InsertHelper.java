@@ -9,7 +9,7 @@ public class InsertHelper extends DBConnector {
     private String into;
     private String values;
 
-    public static InsertHelper getUpdate() {
+    public static InsertHelper getInsert() {
         return new InsertHelper();
     }
 
@@ -29,8 +29,12 @@ public class InsertHelper extends DBConnector {
     }
 
     public InsertHelper execute() {
-        executeUpdate("insert into" + this.insert + " ( " + this.into + ") " + "values (" + this.values + ")");
-        log.debug("Data was inserted");
+        int count = executeUpdate("insert into " + this.insert + " ( " + this.into + ") " + " values (" + this.values + ")");
+        if (count > 0) {
+            log.debug("Data was inserted");
+        } else {
+            log.error("Data wasn't inserted. Something went wrong");
+        }
         return this;
     }
 }
