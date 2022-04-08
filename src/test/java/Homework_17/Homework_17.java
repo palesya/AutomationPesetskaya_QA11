@@ -86,7 +86,7 @@ public class Homework_17 {
                 .contentType(ContentType.JSON)
                 .patch("/api/users/2");
         response.then().assertThat().statusCode(200);
-        Assert.assertEquals(response.then().extract().jsonPath().get("name"), "Alesya Pesetskaya");
+        Assert.assertEquals(response.then().extract().jsonPath().get("name"), "Alesya");
         Assert.assertEquals(response.then().extract().jsonPath().get("job"), "Manual QA");
         Assert.assertTrue(response.then().extract().jsonPath().get("updatedAt").toString().contains(LocalDate.now().toString()));
     }
