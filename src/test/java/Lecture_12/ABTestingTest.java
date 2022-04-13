@@ -12,7 +12,7 @@ public class ABTestingTest extends BaseTest {
     @Test(description = "A/B Testing page")
     public void abTesting_Test() {
         get(AbTestPage.class)
-                .checkTitleText(CONTAINS, "A/B Test")
+                .checkTitleText(CONTAINS, "A/B Jenkinsfile")
                 .checkText(CONTAINS, "Also known");
     }
 
