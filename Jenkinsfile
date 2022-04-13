@@ -9,11 +9,9 @@ pipeline {
         SUITE="src/test/resources/${params.Suite}.xml"
     }
 
-
     stages {
         stage('Build') {
             steps {
-               //git branch:'master',url:'https://github.com/palesya/AutomationPesetskaya_QA11.git'
                bat 'mvn clean'
             }
         }
@@ -35,6 +33,11 @@ pipeline {
                         ])
                         }
             }
+        }
+        post('Publish report') {
+        always {
+        script { allure([ includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: './allure-results']] ]) }
+        }
         }
     }
 }
