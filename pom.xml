@@ -26,12 +26,13 @@
         <rest-assured.version>5.0.0</rest-assured.version>
         <hamcrest-all.version>1.3</hamcrest-all.version>
         <json-schema-validator.version>5.0.0</json-schema-validator.version>
-        <selenide.version>6.3.5</selenide.version>
+        <selenide.version>6.4.0</selenide.version>
         <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
         <selenium-api.version>4.1.3</selenium-api.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <aspectjweaver.version>1.9.6</aspectjweaver.version>
         <allure-maven.version>2.10.0</allure-maven.version>
+        <cucumber.version>4.7.1</cucumber.version>
         <suite/>
     </properties>
 
@@ -136,6 +137,22 @@
             <artifactId>selenium-api</artifactId>
             <version>${selenium-api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -144,9 +161,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <!--suiteXmlFiles>
+                    <suiteXmlFiles>
                         <suiteXmlFile>${suite}</suiteXmlFile>
-                    </suiteXmlFiles-->
+                    </suiteXmlFiles>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.6/aspectjweaver-1.9.6.jar -Xmx256m
                     </argLine>

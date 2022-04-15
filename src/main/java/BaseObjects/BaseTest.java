@@ -12,6 +12,7 @@ import org.testng.annotations.Listeners;
 import java.lang.reflect.InvocationTargetException;
 
 import static BaseObjects.DriverCreation.*;
+import static com.codeborne.selenide.WebDriverRunner.driver;
 
 @Listeners({Listener.class, InvokedMethodsListener.class})
 public abstract class BaseTest {

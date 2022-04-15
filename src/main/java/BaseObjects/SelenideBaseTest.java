@@ -19,4 +19,13 @@ public class SelenideBaseTest {
     protected String getProperty(String propertyName) {
         return PropertyReader.getProperties().getProperty(propertyName);
     }
+
+    protected <T> T get(Class<T> pageClass, String url) {
+        return driver().hasWebDriverStarted() ? page(pageClass) : open(url, pageClass);
+    }
+
+    protected void close() {
+        driver().close();
+    }
+
 }

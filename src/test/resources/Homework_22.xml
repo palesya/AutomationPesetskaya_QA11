@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Homework 22">
+    <parameter name="config" value="booking"/>
+    <listeners>
+        <listener class-name="TestNGUtils.Listener"/>
+    </listeners>
+
+    <test name="Search Page">
+        <classes>
+            <class name="Homework_22.BookingCucumberOptions"/>
+        </classes>
+    </test>
+</suite>

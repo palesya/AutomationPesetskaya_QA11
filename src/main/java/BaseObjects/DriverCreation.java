@@ -28,7 +28,6 @@ public class DriverCreation {
             } else {
                 webDriver = getInstance(valueOf(drivers.toUpperCase(Locale.ROOT))).create();
             }
-
             webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.set(webDriver);

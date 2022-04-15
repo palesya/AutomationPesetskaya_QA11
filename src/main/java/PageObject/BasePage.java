@@ -159,6 +159,13 @@ public abstract class BasePage {
         return this;
     }
 
+    protected BasePage clickAsActions() {
+        Actions actions = new Actions(driver);
+        actions.click();
+        log.debug("Click on page.");
+        return this;
+    }
+
 
     protected BasePage clickButtonAndRepeat(By element) {
         try {
