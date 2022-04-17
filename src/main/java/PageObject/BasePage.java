@@ -159,14 +159,6 @@ public abstract class BasePage {
         return this;
     }
 
-    protected BasePage clickAsActions() {
-        Actions actions = new Actions(driver);
-        actions.click();
-        log.debug("Click on page.");
-        return this;
-    }
-
-
     protected BasePage clickButtonAndRepeat(By element) {
         try {
             clickButton(element);
@@ -219,6 +211,13 @@ public abstract class BasePage {
     public BasePage scrollDown() {
         log.debug("Scroll Down");
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)", "");
+        return this;
+    }
+
+    public BasePage scrollToElement(By element) {
+        log.debug("Scroll to element");
+        Actions actions=new Actions(driver);
+        actions.moveToElement(getWebElement(element));
         return this;
     }
 

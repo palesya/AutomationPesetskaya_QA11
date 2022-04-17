@@ -9,5 +9,5 @@ Feature: Booking test
     Then list of searched hotels is opened
     Then i compare the number of stars <NumberOfStars> of hotel "<Hotelname>"
     Examples:
-      | Hotelname        | NumberOfStars |
-      | Corinthia Lisbon | 5             |
+      | Hotelname         | NumberOfStars |
+      | Hotel Green Glass | 3             |
