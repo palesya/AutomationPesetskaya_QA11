@@ -1,27 +1,32 @@
 package RabotaBy;
 
 import BaseObjects.BaseTest;
-import PageObject.RabotaBy.Homepage.DashboardElement;
-import PageObject.RabotaBy.Homepage.FooterElement;
-import PageObject.RabotaBy.Homepage.HeaderElement;
-import PageObject.RabotaBy.Homepage.MainElement;
-import PageObject.RabotaBy.SearchResultPage.SearchRoot;
+import PageObject.RabotaBy.ContentPage.HomePageContent.HomePage;
+import PageObject.RabotaBy.ContentPage.SearchPageContent.SearchRoot;
+import PageObject.RabotaBy.FooterPage.FooterElement;
+import PageObject.RabotaBy.HeaderPage.HeaderElement;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class HomePage_Test extends BaseTest {
-
+@Parameters("search")
     @Test(priority = 1)
-    public void checkMainPage_Test(){
-        get(MainElement.class).open().checkMainElement();
+    public void checkMainPage_Test() {
+        get(HomePage.class)
+                .open()
+                .getMainElement()
+                .checkMainElement()
+                .getDashboardElement()
+                .checkDashboardContent();
+
         get(HeaderElement.class).checkHeaderElement();
         get(FooterElement.class).checkFooterElement();
-        get(DashboardElement.class).checkDashboardElement();
-        get(MainElement.class).checkMainElement().enterSearch("Automation QA");
+        get(HomePage.class).getMainElement().enterSearch("Automation QA");
     }
 
+   @Parameters("search")
     @Test(priority = 1)
-    public void checkSearchPage_Test(){
-        get(SearchRoot.class).checkSearchRoot();
-        get(SearchRoot.class).checkSearchResult("Automation QA",1);
+    public void checkSearchPage_Test() {
+        get(SearchRoot.class).checkSearchRoot().checkSearchResult("Automation QA", 1);
     }
 }

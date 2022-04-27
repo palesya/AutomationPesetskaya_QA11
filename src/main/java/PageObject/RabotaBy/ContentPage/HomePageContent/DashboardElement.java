@@ -1,14 +1,14 @@
-package PageObject.RabotaBy.Homepage;
+package PageObject.RabotaBy.ContentPage.HomePageContent;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
-public class DashboardElement extends BasePage {
+public class DashboardElement extends HomePage {
 
     private By totalDashboard= By.xpath("//*[@class='supernova-dashboard-content']");
 
-    public DashboardElement checkDashboardElement(){
+    public DashboardElement checkDashboardContent(){
         Assert.assertTrue(isElementExists(totalDashboard));
         return this;
     }
