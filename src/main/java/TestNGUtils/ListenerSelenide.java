@@ -11,7 +11,6 @@ import java.util.Calendar;
 import static Properties.PropertyReader.getProperties;
 
 public class ListenerSelenide implements ITestListener {
-    private static ITestContext context;
 
     @Override
     public void onStart(ITestContext context) {

@@ -11,8 +11,8 @@ import java.util.Properties;
 import static BaseObjects.DriverCreation.createDriver;
 
 public class Listener implements ITestListener {
-    private static ITestContext context;
     private static Properties properties;
+    private static ITestContext context;
 
     @Override
     public void onStart(ITestContext context) {

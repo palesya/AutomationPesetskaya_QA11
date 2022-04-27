@@ -1,4 +1,4 @@
-package PageObject.RabotaBy.Homepage;
+package PageObject.RabotaBy.HeaderPage;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
