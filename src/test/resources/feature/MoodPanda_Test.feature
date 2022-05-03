@@ -1,10 +1,10 @@
-@Smoke
+
 Feature: MoodPanda test
 
   Background: Open login page
     Given i load search page
     When i click get started
-  @Smoke
+
   Scenario Outline: Check login page
     When i enter user "<Username>"
     When i enter password "<UserPassword>"

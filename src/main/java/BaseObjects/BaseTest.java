@@ -14,7 +14,7 @@ import org.testng.annotations.Listeners;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static com.codeborne.selenide.Browsers.CHROME;
+import static Properties.PropertyReader.getProperties;
 
 @Listeners({Listener.class, InvokedMethodsListener.class})
 public abstract class BaseTest {
@@ -25,7 +25,7 @@ public abstract class BaseTest {
     @BeforeTest
     public void precondition(ITestContext context) {
         this.context = context;
-        this.driverManager= DriverManagerFactory.getManager(DriverManagerType.valueOf(context.getSuite().getParameter("config") == null ? String.valueOf(DriverManagerType.CHROME) : context.getSuite().getParameter("config")));
+        this.driverManager= DriverManagerFactory.getManager(DriverManagerType.valueOf(getProperties().getProperty("browser")));
         this.driver = DriverManager.getDriver();
     }
 

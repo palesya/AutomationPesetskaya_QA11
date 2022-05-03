@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
 
-import static BaseObjects.DriverCreation.createDriver;
-
 public class Listener implements ITestListener {
     private static Properties properties;
     private static ITestContext context;
@@ -20,7 +18,6 @@ public class Listener implements ITestListener {
         System.setProperty("logger_time",getSimpleDate());
         new PropertyReader(context.getSuite().getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config"));
         this.properties = PropertyReader.getProperties();
-        createDriver(properties.getProperty("browser") == null ? "chrome" : properties.getProperty("browser"));
     }
 
     private String getSimpleDate() {

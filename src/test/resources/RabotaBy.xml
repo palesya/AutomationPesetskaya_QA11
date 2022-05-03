@@ -3,6 +3,10 @@
 <suite name="Smoke">
     <parameter name="config" value="rabotaby"/>
 
+    <listeners>
+        <listener class-name="TestNGUtils.Listener"></listener>
+    </listeners>
+
     <test name="Start Page">
         <classes>
             <class name="RabotaBy.HomePage_Test"/>
