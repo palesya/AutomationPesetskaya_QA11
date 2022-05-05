@@ -1,7 +1,6 @@
-package PageObject.RabotaBy.SearchResultPage;
+package PageObject.RabotaBy.ContentPage.SearchPageContent;
 
 import PageObject.BasePage;
-import PageObject.RabotaBy.Homepage.DashboardElement;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 

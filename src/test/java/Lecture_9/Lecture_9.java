@@ -39,7 +39,7 @@ public class Lecture_9 extends BaseTest {
         get(HomePage.class).clickLink(AB_TESTING);
 
         get(AbTestPage.class)
-                .checkTitleText(CONTAINS, "A/B Test")
+                .checkTitleText(CONTAINS, "A/B Jenkinsfile")
                 .checkText(CONTAINS, "Also known");
     }
 

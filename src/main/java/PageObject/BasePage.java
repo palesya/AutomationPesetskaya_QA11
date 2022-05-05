@@ -19,12 +19,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import static BaseObjects.DriverCreation.getDriver;
+import static Driver.DriverManager.getDriver;
 
+/**
+ * @author Admin
+ */
 @Log4j
 public abstract class BasePage {
 
+    /**
+     * WebDriver instance
+     */
     public WebDriver driver;
+    /**
+     * WebDriverWait instance
+     */
     protected WebDriverWait wait;
     protected Actions actions;
     protected Properties properties;
@@ -52,6 +61,10 @@ public abstract class BasePage {
         return this;
     }
 
+    /**
+     * @param expectedUrl - url that should be opened
+     * @return instance BasePage
+     */
     public BasePage compareCurrentUrlWithExpected(String expectedUrl) {
         log.debug("Compare current url " + driver.getCurrentUrl());
         Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
@@ -159,7 +172,6 @@ public abstract class BasePage {
         return this;
     }
 
-
     protected BasePage clickButtonAndRepeat(By element) {
         try {
             clickButton(element);
@@ -215,6 +227,13 @@ public abstract class BasePage {
         return this;
     }
 
+    public BasePage scrollToElement(By element) {
+        log.debug("Scroll to element");
+        Actions actions=new Actions(driver);
+        actions.moveToElement(getWebElement(element));
+        return this;
+    }
+
     protected WebElement getWebElement(By element) {
         log.debug("Get web element" + element);
         return driver.findElement(element);
@@ -225,7 +244,7 @@ public abstract class BasePage {
         return driver.findElements(element);
     }
 
-    protected Integer findElementsCount(By element) {
+    protected Integer countFoundElements(By element) {
         log.debug("Count elements: " + element);
         return driver.findElements(element).size();
     }

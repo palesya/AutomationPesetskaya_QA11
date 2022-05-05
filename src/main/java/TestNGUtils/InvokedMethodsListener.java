@@ -1,6 +1,5 @@
 package TestNGUtils;
 
-import BaseObjects.DriverCreation;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,7 +7,7 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import static BaseObjects.DriverCreation.getDriver;
+import static Driver.DriverManager.getDriver;
 
 //позволяет выполнить что-то до и после методов -
 public class InvokedMethodsListener implements IInvokedMethodListener {
