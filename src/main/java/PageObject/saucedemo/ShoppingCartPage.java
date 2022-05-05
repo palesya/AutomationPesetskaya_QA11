@@ -2,12 +2,10 @@ package PageObject.saucedemo;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.Objects;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
@@ -21,17 +19,17 @@ public class ShoppingCartPage extends BasePage {
 
     public void removeFromCart() {
         checkIfProductAdded();
-        int numberOfRemoveButtons = findElementsCount(removeButton);
+        int numberOfRemoveButtons = countFoundElements(removeButton);
         String nameOfAddedProduct = driver.findElement(with(productName).above(removeButton)).getText();
         clickButton(removeButton);
         System.out.println("Product " + nameOfAddedProduct + " is removed");
-        int numberOfRemoveButtonsAfterRemoving = findElementsCount(removeButton);
+        int numberOfRemoveButtonsAfterRemoving = countFoundElements(removeButton);
         Assert.assertEquals(numberOfRemoveButtonsAfterRemoving, numberOfRemoveButtons - 1);
     }
 
     public void removeFromCartWithExactPrice(int minPrice, int maxPrice) {
         checkIfProductAdded();
-        int numberOfRemoveButtons = findElementsCount(removeButton);
+        int numberOfRemoveButtons = countFoundElements(removeButton);
         List<WebElement> prices = getWebElements(price);
         WebElement priceWebElement;
         double selectedPrice;
@@ -50,7 +48,7 @@ public class ShoppingCartPage extends BasePage {
         if(counterOfSuitableProducts==0) {
             System.out.println("No product with price from the range " + minPrice + "-" + maxPrice + "$ is found");
         }
-        int numberOfRemoveButtonsAfterRemoving = findElementsCount(removeButton);
+        int numberOfRemoveButtonsAfterRemoving = countFoundElements(removeButton);
         Assert.assertEquals(numberOfRemoveButtonsAfterRemoving, numberOfRemoveButtons - 1);
     }
 
@@ -61,7 +59,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void checkIfProductAdded() {
-        int productAdded = findElementsCount(removeButton);
+        int productAdded = countFoundElements(removeButton);
         if (productAdded == 0) {
             System.out.println("No product is added to the shopping cart");
         }

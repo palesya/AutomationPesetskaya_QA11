@@ -22,7 +22,7 @@ public class SearchResultsPage extends BasePage {
     private By listOfHotels = By.xpath("//ul/li/div[@role='button']");
 
     public SearchResultsPage closeCalendar() {
-        int numberOfShownCalendars = findElementsCount(calendar);
+        int numberOfShownCalendars = countFoundElements(calendar);
         System.out.println("----------------------" + numberOfShownCalendars);
         if (numberOfShownCalendars > 0) {
             clickButton(totalDashboard);
